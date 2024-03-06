@@ -15,7 +15,8 @@ object SparkObj {
     val rdd = sc.textFile("file:///E:/Big_data_files/txns_gym.txt")
     val word = rdd.flatMap(line => line.split(""))
     val wordpair = word.map(word => (word,1))
-    val df = sc.parallelize(wordpair)
+    val count = wordpair.reduceBykey(_+_)
+    count.foreach(println)
     
 
 
